@@ -1,0 +1,27 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: subhradip
+  password: kreeti@123
+  socket: /var/run/mysqld/mysqld.sock
+  variables:
+    sql_mode: TRADITIONAL
+
+development:
+  <<: *default
+  database: ecommerce_development
+
+test:
+  <<: *default
+  database: ecommerce_test<%= ENV['TEST_ENV_NUMBER'] %>
+
+staging:
+  <<: *default
+  database: ecommerce_staging
+
+production:
+  <<: *default
+  database: ecommerce_production
+  username: ecommerce
+  password: <%= ENV['ecommerce_DATABASE_PASSWORD'] %>
